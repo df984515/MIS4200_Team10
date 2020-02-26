@@ -22,7 +22,7 @@ namespace MIS4200_Team10.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "To Contact Us:";
 
             return View();
         }
