@@ -31,6 +31,6 @@ namespace MIS4200_Team10.Models
         [Display(Name = "Hire Date")]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime hireDate { get; set; }
-        //public string photo { get; set; }
+        public string photo { get; set; }
     }
 }
