@@ -21,6 +21,19 @@ namespace MIS4200_Team10.DAL
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<MIS4200Context,
            MIS4200_Team10.Migrations.MISContext.Configuration>("DefaultConnection"));
         }
+
+        public DbSet<UserDetails> userDetails;
+
+        public DbSet<UserDetails> GetUserDetails()
+        {
+            return userDetails;
+        }
+
+        public void SetUserDetails(DbSet<UserDetails> value)
+        {
+            userDetails = value;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
