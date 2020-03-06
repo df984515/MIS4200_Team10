@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MIS4200_Team10.DAL;
 using MIS4200_Team10.Models;
 
@@ -18,7 +19,7 @@ namespace MIS4200_Team10.Controllers
         // GET: UserDetails
         public ActionResult Index()
         {
-            return View(db.UserDetails.ToList());
+            return View(db.GetUserDetails().ToList());
         }
 
         // GET: UserDetails/Details/5
@@ -28,7 +29,7 @@ namespace MIS4200_Team10.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = db.GetUserDetails().Find(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
@@ -51,8 +52,10 @@ namespace MIS4200_Team10.Controllers
         {
             if (ModelState.IsValid)
             {
-                userDetails.ID = Guid.NewGuid();
-                db.UserDetails.Add(userDetails);
+                Guid memberID;
+                Guid.TryParse(User.Identity.GetUserId(), out memberID);
+                userDetails.ID = memberID;
+                db.userDetails.Add(userDetails);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -67,7 +70,7 @@ namespace MIS4200_Team10.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = db.GetUserDetails().Find(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
@@ -98,7 +101,7 @@ namespace MIS4200_Team10.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
+            UserDetails userDetails = db.GetUserDetails().Find(id);
             if (userDetails == null)
             {
                 return HttpNotFound();
@@ -111,8 +114,8 @@ namespace MIS4200_Team10.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            UserDetails userDetails = db.UserDetails.Find(id);
-            db.UserDetails.Remove(userDetails);
+            UserDetails userDetails = db.GetUserDetails().Find(id);
+            db.GetUserDetails().Remove(userDetails);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
