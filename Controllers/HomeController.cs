@@ -15,7 +15,7 @@ namespace MIS4200_Team10.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Culture Application";
 
             return View();
         }
