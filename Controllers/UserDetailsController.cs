@@ -19,7 +19,15 @@ namespace MIS4200_Team10.Controllers
         // GET: UserDetails
         public ActionResult Index()
         {
-            return View(db.UserDetails.ToList());
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(db.UserDetails.ToList());
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
+            
         }
 
         // GET: UserDetails/Details/5
@@ -84,7 +92,17 @@ namespace MIS4200_Team10.Controllers
             {
                 return HttpNotFound();
             }
-            return View(userDetails);
+            Guid memberID;
+            Guid.TryParse(User.Identity.GetUserId(), out memberID);
+            if (userDetails.ID == memberID)
+            {
+                return View(User);
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
+           // return View(userDetails);
         }
 
         // POST: UserDetails/Edit/5
@@ -115,6 +133,7 @@ namespace MIS4200_Team10.Controllers
             {
                 return HttpNotFound();
             }
+            
             return View(userDetails);
         }
 
