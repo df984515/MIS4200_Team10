@@ -26,5 +26,9 @@ namespace MIS4200_Team10.Controllers
 
             return View();
         }
+        public ActionResult OurValues()
+        {
+            return View();
+        }
     }
 }
