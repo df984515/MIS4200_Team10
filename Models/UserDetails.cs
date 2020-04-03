@@ -28,9 +28,9 @@ namespace MIS4200_Team10.Models
         [Display(Name = "Office")]
         public string Office { get; set; }
         
-        [Required(ErrorMessage = "Please include your business unit.")]
-        [Display(Name = "Business Unit")]
-        public string BusinessUnit { get; set; }
+        
+        [Display(Name = "Recognition")]
+        public string Recognition { get; set; }
 
         [Required(ErrorMessage = "Please include your current position title.")]
         [Display(Name = "Current position")]
