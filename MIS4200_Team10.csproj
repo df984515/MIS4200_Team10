@@ -250,6 +250,7 @@
     <Content Include="Views\UserDetails\Index.cshtml" />
     <Content Include="Views\UserDetails\NotAuthenticated.cshtml" />
     <Content Include="Views\Home\OurValues.cshtml" />
+    <Content Include="Views\UserDetails\FailedDelete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

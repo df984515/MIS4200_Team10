@@ -110,7 +110,7 @@ namespace MIS4200_Team10.Controllers
             Guid.TryParse(User.Identity.GetUserId(), out memberID);
             if (userDetails.ID == memberID)
             {
-                return View(User);
+                return View("Edit");
             }
             else
             {
@@ -147,8 +147,18 @@ namespace MIS4200_Team10.Controllers
             {
                 return HttpNotFound();
             }
-            
-            return View(userDetails);
+            Guid memberID;
+            Guid.TryParse(User.Identity.GetUserId(), out memberID);
+            if (userDetails.ID == memberID)
+            {
+                return View("Delete");
+            }
+            else
+            {
+                return View("FailedDelete");
+            }
+            // return View(userDetails);
+
         }
 
         // POST: UserDetails/Delete/5
