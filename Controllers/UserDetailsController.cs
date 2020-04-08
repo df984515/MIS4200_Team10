@@ -17,21 +17,35 @@ namespace MIS4200_Team10.Controllers
         private MIS4200Context db = new MIS4200Context();
 
         // GET: UserDetails
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View(db.UserDetails.ToList());
+                
+                var testusers = from u in db.UserDetails select u;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    testusers = testusers.Where(u =>
+                    u.lastName.Contains(searchString)
+                    || u.firstName.Contains(searchString));
+                    // if here, users were found so view them
+                    return View(testusers.ToList());
+                }
+                else
+                {
+                    return View(db.UserDetails.ToList());
+                }                
+
             }
             else
             {
                 return View("NotAuthenticated");
-            }
-            
-        }
+            }           
 
-        // GET: UserDetails/Details/5
-        public ActionResult Details(Guid? id)
+        }       
+
+            // GET: UserDetails/Details/5
+            public ActionResult Details(Guid? id)
         {
             if (id == null)
             {
@@ -56,7 +70,7 @@ namespace MIS4200_Team10.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Email,firstName,lastName,PhoneNumber,Office,BusinessUnit,Position,hireDate,photo")] UserDetails userDetails)
+        public ActionResult Create([Bind(Include = "ID,Email,firstName,lastName,PhoneNumber,Office,Position,hireDate,photo")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
             {
@@ -110,7 +124,7 @@ namespace MIS4200_Team10.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Email,firstName,lastName,PhoneNumber,Office,BusinessUnit,Position,hireDate,photo")] UserDetails userDetails)
+        public ActionResult Edit([Bind(Include = "ID,Email,firstName,lastName,PhoneNumber,Office,Position,hireDate,photo")] UserDetails userDetails)
         {
             if (ModelState.IsValid)
             {
