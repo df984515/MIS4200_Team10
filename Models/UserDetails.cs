@@ -26,11 +26,8 @@ namespace MIS4200_Team10.Models
         [Phone]
         public string PhoneNumber { get; set; }
         [Display(Name = "Office")]
-        public string Office { get; set; }
+        public string Office { get; set; }            
         
-        
-        [Display(Name = "Recognition")]
-        public string Recognition { get; set; }
 
         [Required(ErrorMessage = "Please include your current position title.")]
         [Display(Name = "Current position")]
@@ -40,5 +37,10 @@ namespace MIS4200_Team10.Models
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime hireDate { get; set; }
         public string photo { get; set; }
+
+        [Display(Name ="Full Name")]
+        public string fullName { get { return firstName + ", " + lastName; } }
+
+        public ICollection<Recognition> Recognition { get; set; }
     }
 }

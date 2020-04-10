@@ -1,0 +1,26 @@
+﻿@model MIS4200_Team10.Models.Values
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Values</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.coreValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.coreValue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.valueID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

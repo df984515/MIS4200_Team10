@@ -41,6 +41,10 @@ namespace MIS4200_Team10.DAL
 
         public System.Data.Entity.DbSet<MIS4200_Team10.Models.UserDetails> UserDetails { get; set; }
         public object Users { get; internal set; }
+
+        public System.Data.Entity.DbSet<MIS4200_Team10.Models.Values> Values { get; set; }
+
+        public System.Data.Entity.DbSet<MIS4200_Team10.Models.Recognition> Recognitions { get; set; }
     }
 }
    

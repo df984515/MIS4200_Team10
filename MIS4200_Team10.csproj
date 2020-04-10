@@ -170,7 +170,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecognitionsController.cs" />
     <Compile Include="Controllers\UserDetailsController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\MIS4200_Team10_Context.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,6 +180,7 @@
     <Compile Include="Migrations\MISContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Values.cs" />
+    <Compile Include="Models\Recognition.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserDetails.cs" />
@@ -251,6 +254,16 @@
     <Content Include="Views\UserDetails\NotAuthenticated.cshtml" />
     <Content Include="Views\Home\OurValues.cshtml" />
     <Content Include="Views\UserDetails\FailedDelete.cshtml" />
+    <Content Include="Views\Values\Create.cshtml" />
+    <Content Include="Views\Values\Delete.cshtml" />
+    <Content Include="Views\Values\Details.cshtml" />
+    <Content Include="Views\Values\Edit.cshtml" />
+    <Content Include="Views\Values\Index.cshtml" />
+    <Content Include="Views\Recognitions\Create.cshtml" />
+    <Content Include="Views\Recognitions\Delete.cshtml" />
+    <Content Include="Views\Recognitions\Details.cshtml" />
+    <Content Include="Views\Recognitions\Edit.cshtml" />
+    <Content Include="Views\Recognitions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
