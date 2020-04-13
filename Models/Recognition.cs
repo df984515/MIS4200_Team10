@@ -31,5 +31,8 @@ namespace MIS4200_Team10.Models
         [Required(ErrorMessage = "Please describe why you are recongizing this employee")]
         [StringLength(140)]
         public string recognitionReason { get; set; }
+
+        [Display(Name = "Employee")]
+        public string employee { get { return UserDetails.firstName + ", " + UserDetails.lastName; } }
     }
 }

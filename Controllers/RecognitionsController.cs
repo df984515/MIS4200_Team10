@@ -16,11 +16,23 @@ namespace MIS4200_Team10.Controllers
         private MIS4200Context db = new MIS4200Context();
 
         // GET: Recognitions
-        public ActionResult Index()
-        {
-            var recognitions = db.Recognitions.Include(r => r.UserDetails).Include(r => r.Values);
-            return View(recognitions.ToList());
-        }
+        public ActionResult Index(string searchString)
+        {           
+                var testusers = from u in db.Recognitions.Include(r => r.UserDetails).Include(r => r.Values) select u;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    testusers = testusers.Where(u =>
+                    u.employee.Contains(searchString));                    
+                    // if here, users were found so view them
+                    return View(testusers.ToList());
+                }
+                else
+                {
+                    return View(db.Recognitions.ToList());
+                }           
+
+        }       
+        
 
         // GET: Recognitions/Details/5
         public ActionResult Details(int? id)
@@ -40,9 +52,17 @@ namespace MIS4200_Team10.Controllers
         // GET: Recognitions/Create
         public ActionResult Create()
         {
-            ViewBag.ID = new SelectList(db.UserDetails, "ID", "fullName");
-            ViewBag.valueID = new SelectList(db.Values, "valueID", "coreValue");
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.ID = new SelectList(db.UserDetails, "ID", "fullName");
+                ViewBag.valueID = new SelectList(db.Values, "valueID", "coreValue");
+                return View();
+            }            
+            else
+            {
+                return View("NotAuthenticated");
+            }
+                
         }
 
         // POST: Recognitions/Create

@@ -1,14 +1,27 @@
 ﻿@model IEnumerable<MIS4200_Team10.Models.Recognition>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home";
 }
 
-<h2>Index</h2>
+    <div class="jumbotron">
+        <h1 style="color:gold; text-align:center">Recently Recognized</h1>
+        <p class="lead" style="color:darkblue; text-align:center">
+            Here are the most recently recognized of your fellow employees!
+        </p>
+        @*@using (Html.BeginForm("Index", "Recognitions", FormMethod.Get))
+        {
+            <p class="lead" style="color:darkblue; text-align:center">
+                Find by name: @Html.TextBox("searchString")
+                <input type="submit" value="Search" />
+            </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        }*@
+        <p class="lead" style="color:darkblue; text-align:center">
+            @Html.ActionLink("Recognize Someone", "Create")
+        </p>
+    </div>
+
 <table class="table">
     <tr>
         <th>
@@ -39,12 +52,7 @@
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.recognitionDate)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.recognitionID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.recognitionID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.recognitionID })
-    </td>
+    </td>    
 </tr>
 }
 

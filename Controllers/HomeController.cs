@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace MIS4200_Team10.Controllers
-{
+{        
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
+        {          
+
             return View();
         }
 
