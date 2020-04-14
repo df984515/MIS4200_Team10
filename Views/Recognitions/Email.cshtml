@@ -1,0 +1,25 @@
+﻿@{
+
+    ViewBag.Title = "Index";
+}
+
+<h2>Recognition Notification</h2>
+<br />
+
+@{
+
+    if (TempData["mailError"] != null && TempData["mailError"] != "")
+
+    {
+        <h3>
+            The following error occurred while trying to send the recognition:
+            @TempData["mailError"].ToString()
+        </h3>
+    }
+    else
+    {
+        <h3>Recognition Sent!</h3>
+    }
+    <br />
+    @Html.ActionLink("Return to home", "index", "home")
+}

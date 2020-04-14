@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MIS4200_Team10.DAL;
 using MIS4200_Team10.Models;
+using System.Net.Mail;
 
 namespace MIS4200_Team10.Controllers
 {
@@ -76,13 +77,55 @@ namespace MIS4200_Team10.Controllers
             {
                 db.Recognitions.Add(recognition);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.ID = new SelectList(db.UserDetails, "ID", "fullName", recognition.ID);
-            ViewBag.valueID = new SelectList(db.Values, "valueID", "coreValue", recognition.valueID);
-            return View(recognition);
+                ViewBag.ID = new SelectList(db.UserDetails, "ID", "fullName", recognition.ID);
+                ViewBag.valueID = new SelectList(db.Values, "valueID", "coreValue", recognition.valueID);
+
+                SmtpClient myClient = new SmtpClient();
+                // the following line has to contain the email address and password of someone
+                // authorized to use the email server (you will need a valid Ohio account/password
+                // for this to work)
+
+                myClient.Credentials = new NetworkCredential("AuthorizedUser", "UserPassword");
+                MailMessage myMessage = new MailMessage();
+
+                // the syntax here is email address, username (that will appear in the email)
+                MailAddress from = new MailAddress("luce@ohio.edu", "SysAdmin");
+                myMessage.From = from;
+                var user = db.userDetails.Find(recognition.ID);                
+                var userEmail = user.Email;
+                myMessage.To.Add(userEmail); // this should be replaced with model data
+                                             // as shown at the end of this document
+                myMessage.Subject = "You Have Been Recognized!";
+                // the body of the email is hard coded here but could be dynamically created using data
+                // from the model- see the note at the end of this document
+                myMessage.Body = "Congratulations! ";
+                myMessage.Body += "You have been recgonized for the core value of ";
+                myMessage.Body += recognition.Values;
+                myMessage.Body += "! By ";
+                myMessage.Body += db.userDetails.Find(User.Identity.Name);
+                myMessage.Body += ". They gave this reason for recognizing you: ";
+                myMessage.Body += recognition.recognitionReason;
+                myMessage.Body += " Again, congratulations on being recognized and thank you for living our values!";
+                try
+                {
+                    myClient.Send(myMessage);
+                    TempData["mailError"] = "";
+                }
+                catch (Exception ex)
+                {
+                    // this captures an Exception and allows you to display the message in the View
+                    TempData["mailError"] = ex.Message;
+                }
+
+                return View("Email");                
+            }
+            else
+            {
+                return View("Email");
+            }            
         }
+                
 
         // GET: Recognitions/Edit/5
         public ActionResult Edit(int? id)
