@@ -90,9 +90,9 @@ namespace MIS4200_Team10.Controllers
                 MailMessage myMessage = new MailMessage();
 
                 // the syntax here is email address, username (that will appear in the email)
-                MailAddress from = new MailAddress("luce@ohio.edu", "SysAdmin");
+                MailAddress from = new MailAddress("luce@ohio.edu", "System Admin");
                 myMessage.From = from;
-                var user = db.userDetails.Find(recognition.ID);                
+                var user = db.UserDetails.Find(recognition.ID);
                 var userEmail = user.Email;
                 myMessage.To.Add(userEmail); // this should be replaced with model data
                                              // as shown at the end of this document
@@ -102,9 +102,8 @@ namespace MIS4200_Team10.Controllers
                 myMessage.Body = "Congratulations! ";
                 myMessage.Body += "You have been recgonized for the core value of ";
                 myMessage.Body += recognition.Values;
-                myMessage.Body += "! By ";
-                myMessage.Body += db.userDetails.Find(User.Identity.Name);
-                myMessage.Body += ". They gave this reason for recognizing you: ";
+                myMessage.Body += "!";
+                myMessage.Body += ". This was the reason for recognizing you: ";
                 myMessage.Body += recognition.recognitionReason;
                 myMessage.Body += " Again, congratulations on being recognized and thank you for living our values!";
                 try
