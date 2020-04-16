@@ -94,18 +94,21 @@ namespace MIS4200_Team10.Controllers
                 myMessage.From = from;
                 var user = db.UserDetails.Find(recognition.ID);
                 var userEmail = user.Email;
+                var value = db.Values.Find(recognition.valueID);
+                var recognitionValue = value.coreValue;
                 myMessage.To.Add(userEmail); // this should be replaced with model data
                                              // as shown at the end of this document
                 myMessage.Subject = "You Have Been Recognized!";
                 // the body of the email is hard coded here but could be dynamically created using data
                 // from the model- see the note at the end of this document
-                myMessage.Body = "Congratulations! ";
-                myMessage.Body += "You have been recgonized for the core value of ";
-                myMessage.Body += Convert.ToString(recognition.Values);
-                myMessage.Body += "!";
-                myMessage.Body += ". This was the reason for recognizing you: ";
-                myMessage.Body += Convert.ToString(recognition.recognitionReason);
-                myMessage.Body += " Again, congratulations on being recognized and thank you for living our values!";
+                myMessage.Body = "Congratulations!" + Environment.NewLine + Environment.NewLine; 
+                myMessage.Body += "You have been recgonized for the core value of "; 
+                myMessage.Body += "'" + Convert.ToString(recognitionValue) + "'" + "!" + Environment.NewLine + Environment.NewLine;                
+                myMessage.Body += "This was the reason for recognizing you: ";
+                myMessage.Body += "'" + Convert.ToString(recognition.recognitionReason) + "'" + Environment.NewLine + Environment.NewLine;
+                myMessage.Body += "Again, congratulations on being recognized and thank you for living our values!" + Environment.NewLine + Environment.NewLine;
+                myMessage.Body += "Best Regards," + Environment.NewLine + Environment.NewLine;
+                myMessage.Body += "Dave Rosevelt - CEO of Centric Consulting";
                 try
                 {
                     myClient.Send(myMessage);
