@@ -101,10 +101,10 @@ namespace MIS4200_Team10.Controllers
                 // from the model- see the note at the end of this document
                 myMessage.Body = "Congratulations! ";
                 myMessage.Body += "You have been recgonized for the core value of ";
-                myMessage.Body += recognition.Values.ToString();
+                myMessage.Body += Convert.ToString(recognition.Values);
                 myMessage.Body += "!";
                 myMessage.Body += ". This was the reason for recognizing you: ";
-                myMessage.Body += recognition.recognitionReason.ToString();
+                myMessage.Body += Convert.ToString(recognition.recognitionReason);
                 myMessage.Body += " Again, congratulations on being recognized and thank you for living our values!";
                 try
                 {
