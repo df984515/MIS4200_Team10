@@ -1,59 +1,61 @@
 ﻿@model IEnumerable<MIS4200_Team10.Models.Recognition>
 
+
 @{
     ViewBag.Title = "Home";
 }
 
-    <div class="jumbotron">
-        <h1 style="color:gold; text-align:center">Recently Recognized</h1>
-        <p class="lead" style="color:darkblue; text-align:center">
-            Here are the most recently recognized of your fellow employees!
-        </p>
-        @*@using (Html.BeginForm("Index", "Recognitions", FormMethod.Get))
-        {
-            <p class="lead" style="color:darkblue; text-align:center">
-                Find by name: @Html.TextBox("searchString")
-                <input type="submit" value="Search" />
-            </p>
-
-        }*@
-        <p class="lead" style="color:darkblue; text-align:center">
-            @Html.ActionLink("Recognize Someone", "Create")
-        </p>
-    </div>
+<div class="jumbotron">
+    <h1 style="color:gold; text-align:center">Recently Recognized</h1>
+    <p class="lead" style="color:darkblue; text-align:center">
+        Here are the most recently recognized of your fellow employees!
+    </p>    
+    <p class="lead" style="color:darkblue; text-align:center">
+        @Html.ActionLink("Recognize Someone", "Create")
+    </p>
+</div>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserDetails.fullName)
+            @*@Html.DisplayNameFor(model => model.UserDetails.fullName)*@
+            Employee
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Values.coreValue)
+            @*@Html.DisplayNameFor(model => model.Values.coreValue)*@
+            Core Value
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.recognitionReason)
+            @*@Html.DisplayNameFor(model => model.recognitionReason)*@
+            Recognition Reason
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.recognitionDate)
+            @*@Html.DisplayNameFor(model => model.recognitionDate)*@
+            Recognition Date
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.UserDetails.fullName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Values.coreValue)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.recognitionReason)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.recognitionDate)
-    </td>    
-</tr>
-}
+    @foreach (var item in ViewBag.rec)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.UserDetails.fullName)*@
+                @item.employee
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Values.coreValue)*@
+                @item.coreValue
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.recognitionReason)*@
+                @item.recognitionReason
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.recognitionDate)*@
+                @item.recognitionDate.ToLongDateString()
+            </td>
+        </tr>
+    }
 
 </table>

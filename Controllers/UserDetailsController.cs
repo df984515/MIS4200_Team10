@@ -51,12 +51,33 @@ namespace MIS4200_Team10.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserDetails userDetails = db.UserDetails.Find(id);
-            if (userDetails == null)
+            var rec = db.Recognitions.Where(r => r.ID == id).OrderByDescending(a => a.recognitionDate).Take(10);
+            var recList = rec.ToList();
+            ViewBag.rec = recList;
+
+            var totalCount = recList.Count(); //counts all the recognitions for that person
+            var rec1Count = recList.Where(r => r.valueID == 1).Count();//Commit to Delivery Excellence
+            var rec2Count = recList.Where(r => r.valueID == 2).Count();//Embrace Integrity and Openness
+            var rec3Count = recList.Where(r => r.valueID == 3).Count();//Practice Responsible Stewardship
+            var rec4Count = recList.Where(r => r.valueID == 4).Count();//Invest in an Exceptional Culture
+            var rec5Count = recList.Where(r => r.valueID == 5).Count();//Ignite Passion for the Greater Good
+            var rec6Count = recList.Where(r => r.valueID == 6).Count();//Strive to Innovate
+            var rec7Count = recList.Where(r => r.valueID == 7).Count();//Live a Balanced Life
+
+            ViewBag.Total = totalCount;
+            ViewBag.Excellence = rec1Count;
+            ViewBag.Integrity = rec2Count;
+            ViewBag.Stewardship = rec3Count;
+            ViewBag.Culture = rec4Count;
+            ViewBag.Ignite = rec5Count;
+            ViewBag.Innovate = rec6Count;
+            ViewBag.Balanced = rec7Count;
+
+            if (rec == null)
             {
                 return HttpNotFound();
             }
-            return View(userDetails);
+            return View("Details");
         }
 
         // GET: UserDetails/Create

@@ -33,6 +33,8 @@ namespace MIS4200_Team10.Models
         public string recognitionReason { get; set; }
 
         [Display(Name = "Employee")]
-        public string employee { get { return UserDetails.firstName + UserDetails.lastName; } }
+        public string employee { get { return UserDetails.firstName + " " + UserDetails.lastName; } }
+        [Display(Name = "Core Value")]
+        public string coreValue { get { return Values.coreValue; } }
     }
 }

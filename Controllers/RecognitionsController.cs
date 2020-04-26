@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using MIS4200_Team10.DAL;
 using MIS4200_Team10.Models;
 using System.Net.Mail;
+using Microsoft.AspNet.Identity;
+using X.PagedList;
 
 namespace MIS4200_Team10.Controllers
 {
@@ -17,21 +19,12 @@ namespace MIS4200_Team10.Controllers
         private MIS4200Context db = new MIS4200Context();
 
         // GET: Recognitions
-        public ActionResult Index(string searchString)
-        {           
-                var testusers = from u in db.Recognitions.Include(r => r.UserDetails).Include(r => r.Values) select u;
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    testusers = testusers.Where(u =>
-                    u.employee.Contains(searchString));                    
-                    // if here, users were found so view them
-                    return View(testusers.ToList());
-                }
-                else
-                {
-                    return View(db.Recognitions.ToList());
-                }           
-
+        public ActionResult Index()
+        {
+            var rec = db.Recognitions.OrderByDescending(a => a.recognitionDate);
+            var recList = rec.ToList();
+            ViewBag.rec = recList;
+            return View(); 
         }       
         
 
@@ -55,7 +48,11 @@ namespace MIS4200_Team10.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                ViewBag.ID = new SelectList(db.UserDetails, "ID", "fullName");
+                string empID = User.Identity.GetUserId();
+                SelectList employees = new SelectList(db.UserDetails, "ID", "fullName");
+                employees = new SelectList(employees.Where(x => x.Value != empID).ToList(), "Value", "Text");
+                ViewBag.ID = employees;
+
                 ViewBag.valueID = new SelectList(db.Values, "valueID", "coreValue");
                 return View();
             }            
