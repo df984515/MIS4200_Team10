@@ -135,7 +135,7 @@ namespace MIS4200_Team10.Controllers
             }
             else
             {
-                return View("NotAuthenticated");
+                return View("FailedDelete");
             }
            // return View(userDetails);
         }

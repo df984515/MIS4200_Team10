@@ -4,20 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 style="color:gold;">Employees</h2>
 
 @using (Html.BeginForm("Index", "UserDetails", FormMethod.Get))
 {
-<p>
+<p style="color:darkblue;">
     Find by name: @Html.TextBox("searchString")
     <input type="submit" value="Search" />
 </p>
 
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p style="color:darkblue;">
+    @Html.ActionLink("Create New", "Register", "Account")
 </p>
-<table class="table">
+<table class="table" style="color:darkblue;">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Email)

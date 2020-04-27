@@ -4,31 +4,79 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 style="color:gold;">Details</h2>
 
 <div>
-    <h4>User Recognition Details</h4>
+    <h4 style="color:darkblue;">User Recognition Details</h4>
     <hr />
-    
     @{
         var total = ViewBag.Total;
-        <h2>Total Recognitions Received = @total</h2>   
-        var excellence = ViewBag.Excellence;
-        <h3>Commit to Delivery Excellence = @excellence</h3>     
-        var integrity = ViewBag.Integrity;
-        <h3>Embrace Integrity and Openness = @integrity</h3>
-        var stewardship = ViewBag.Stewardship;
-        <h3>Practice Responsible Stewardship = @stewardship</h3>
-        var culture = ViewBag.Culture;
-        <h3>Invest in an Exceptional Culture = @culture</h3>       
-        var ignite = ViewBag.Ignite;
-        <h3>Ignite Passion for the Greater Good = @ignite</h3>       
-        var innovate = ViewBag.Innovate;
-        <h3>Strive to Innovate = @innovate</h3>        
-        var balanced = ViewBag.Balanced;
-        <h3>Live a Balanced Life = @balanced</h3>
-    }    
-</div>
+        <h3 style="color:darkblue;">Total Recognitions Received = @total</h3>
+        <table class="table" style="color:darkblue;">
+            <tr>
+                <th>
+                    Commit to Delivery Excellence
+                </th>
+                <th>
+                    Embrace Integrity and Openness
+                </th>
+                <th>
+                    Practice Responsible Stewardship
+                </th>
+                <th>
+                    Invest in an Exceptional Culture
+                </th>
+                <th>
+                    Ignite Passion for the Greater Good
+                </th>
+                <th>
+                    Strive to Innovate
+                </th>
+                <th>
+                    Live a Balanced Life
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @{ var excellence = ViewBag.Excellence;
+                        @excellence
+                    }
+                </td>
+                <td>
+                    @{ var integrity = ViewBag.Integrity;
+                        @integrity
+                    }
+                </td>
+                <td>
+                    @{ var stewardship = ViewBag.Stewardship;
+                        @stewardship
+                    }
+                </td>
+                <td>
+                    @{ var culture = ViewBag.Culture;
+                        @culture
+                    }
+                </td>
+                <td>
+                    @{ var ignite = ViewBag.Ignite;
+                        @ignite
+                    }
+                </td>
+                <td>
+                    @{ var innovate = ViewBag.Innovate;
+                        @innovate
+                    }
+                </td>
+                <td>
+                    @{ var balanced = ViewBag.Balanced;
+                        @balanced
+                    }
+                </td>
+            </tr>
+        </table>
+                        }
+
+    </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
     @Html.ActionLink("Back to List", "Index")

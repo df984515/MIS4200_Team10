@@ -38,7 +38,7 @@ namespace MIS4200_Team10.Models
         public DateTime hireDate { get; set; }        
 
         [Display(Name ="Full Name")]
-        public string fullName { get { return firstName + ", " + lastName; } }
+        public string fullName { get { return firstName + " " + lastName; } }
 
         public ICollection<Recognition> Recognition { get; set; }
     }
